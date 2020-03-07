@@ -16,7 +16,7 @@ public class Main {
 		
 		try {
 			InputStreamReader reader = 
-					new InputStreamReader(new FileInputStream("C:\\Users\\andre\\eclipse-workspace\\XMLReading\\src\\main\\resources\\Pain008sample.xml"));
+					new InputStreamReader(new FileInputStream("ENTER_FILE_LOCATION"));
 			transformer.transform(reader);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
