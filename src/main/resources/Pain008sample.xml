@@ -10,7 +10,7 @@
 			</InitgPty>
 		</GrpHdr>
 		<PmtInf>
-			<PmtInfId>Payment-ID</PmtInfId>
+			<PmtInfId>VIRTUAL</PmtInfId>
 			<PmtMtd>DD</PmtMtd>
 			<NbOfTxs>2</NbOfTxs>
 			<CtrlSum>6655.86</CtrlSum>
@@ -29,7 +29,7 @@
 			</Cdtr>
 			<CdtrAcct>
 				<Id>
-					<IBAN>DE87200500001234567890</IBAN>
+					<IBAN>VIRTAUL_IBAN</IBAN>
 				</Id>
 			</CdtrAcct>
 			<CdtrAgt>

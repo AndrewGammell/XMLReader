@@ -1,4 +1,4 @@
-package transformer;
+package xmlUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -19,7 +19,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-public class XMLTransformer {
+public class XMLReading {
 
 	private XMLStreamReader xmlReader;
 	private XMLInputFactory xmlFactory;
@@ -35,7 +35,7 @@ public class XMLTransformer {
 
 			xmlReader.next();
 			if(xmlReader.isStartElement()) {
-				doc.appendChild(createElement());
+				doc.appendChild(createElement(false));
 			}		
 
 		}catch(Exception e) {
@@ -45,8 +45,9 @@ public class XMLTransformer {
 	}
 
 
-	private Element createElement() throws XMLStreamException {
+	private Element createElement(boolean onlyVam) throws XMLStreamException {
 		System.out.println("Create Element Called");
+		boolean onlyVAM = onlyVam;
 
 		String name = null;
 		Element element = null;
@@ -59,6 +60,15 @@ public class XMLTransformer {
 		}		
 
 		if(xmlReader.isCharacters() && !xmlReader.getText().isBlank()) {
+			
+			if(name.equals("PmtInfId") && xmlReader.getText().equalsIgnoreCase("VIRTUAL")) {
+				onlyVAM = true;
+				System.out.println("////////////////////////VAM FOUND/////////////////////////////////////////////////////");
+			}
+			
+			if(name.equals("IBAN")&& xmlReader.getText().equalsIgnoreCase("VIRTAUL_IBAN")) {
+				System.out.println("////////////////////////////////VIRTUAL IBAN FOUND/////////////////////////////////////////");
+			}
 			element.setTextContent(xmlReader.getText());
 			System.out.println("Set Text "  + xmlReader.getText() + " for: " + name);
 
@@ -78,7 +88,7 @@ public class XMLTransformer {
 
 			do {
 				System.out.println("Creating Child Element For: " + name);
-				element.appendChild(createElement());
+				element.appendChild(createElement(onlyVAM));
 				
 				while (xmlReader.isCharacters()){ 
 					xmlReader.next();

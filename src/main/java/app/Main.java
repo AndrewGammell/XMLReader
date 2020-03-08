@@ -7,17 +7,19 @@ import java.io.InputStreamReader;
 
 import javax.xml.transform.Transformer;
 
-import transformer.XMLTransformer;
+import xmlUtils.XMLReading;
+import xmlUtils.XMLSort;
 
 public class Main {
 
 	public static void main(String[] args) {
-		XMLTransformer transformer = new XMLTransformer();
+		XMLReading transformer = new XMLReading();
 		
 		try {
 			InputStreamReader reader = 
-					new InputStreamReader(new FileInputStream("ENTER_FILE_LOCATION"));
-			transformer.transform(reader);
+					new InputStreamReader(new FileInputStream("C:\\Users\\andre\\eclipse-workspace\\XMLReading\\src\\main\\resources\\Pain008sample.xml"));
+//			transformer.transform(reader);
+			new XMLSort().sortTxns(reader);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
